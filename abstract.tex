@@ -1,0 +1,87 @@
+\documentclass{anstrans}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{MHTGR-350 Moltres Benchmark}
+\author{Roberto E. Fairhurst Agosta, Kathryn D. Huff}
+
+\institute{
+University of Illinois at Urbana-Champaign, Dept. of Nuclear, Plasma, and Radiological Engineering\\
+ref3@illinois.edu
+}
+
+%%%% packages and definitions (optional)
+\usepackage{graphicx} % allows inclusion of graphics
+\usepackage{booktabs} % nice rules (thick lines) for tables
+\usepackage{microtype} % improves typography for PDF
+\usepackage{xspace}
+\usepackage{tabularx}
+\usepackage{floatrow}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{placeins}
+\usepackage{amsmath}
+\usepackage[acronym,toc]{glossaries}
+\include{acros}
+\makeglossaries
+
+\usepackage[printwatermark]{xwatermark}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{lipsum}
+
+\newcommand{\SN}{S$_N$}
+\renewcommand{\vec}[1]{\bm{#1}} %vector is bold italic
+\newcommand{\vd}{\bm{\cdot}} % slightly bold vector dot
+\newcommand{\grad}{\vec{\nabla}} % gradient
+\newcommand{\ud}{\mathop{}\!\mathrm{d}} % upright derivative symbol
+
+\newcolumntype{c}{>{\hsize=.56\hsize}X}
+\newcolumntype{b}{>{\hsize=.7\hsize}X}
+\newcolumntype{s}{>{\hsize=.74\hsize}X}
+\newcolumntype{f}{>{\hsize=.1\hsize}X}
+\newcolumntype{a}{>{\hsize=.45\hsize}X}
+%\usepackage[pagestyles]{titlesec}
+%\titleformat*{\subsection}{\normalfont}
+%\titleformat{\section}{\bfseries}{Item \thesection.\ }{0pt}{}
+
+%\newwatermark[allpages,color=gray!50,angle=45,scale=3,xpos=0,ypos=0]{DRAFT}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+\section{Method}
+
+\section{Results}
+
+\section{Conclusion}
+
+\section{Acknowledgements}
+
+Roberto E. Fairhurst Agosta and Prof. Huff are supported by the \gls{NRC} Faculty Development Program (award NRC-HQ-84-14-G-0054 Program B). Samuel G. Dotson is supported by the \gls{NRC} Graduate Fellowship Program. Prof. Huff is also supported by the Blue Waters sustained-petascale computing project supported by the National Science Foundation (awards OCI-0725070 and ACI-1238993) and the state of Illinois, the DOE ARPA-E MEITNER Program (award DE-AR0000983), the DOE H2@Scale Program (award), and the International Institute for Carbon Neutral Energy Research (WPI-I2CNER), sponsored by the Japanese Ministry of Education, Culture, Sports, Science and Technology.
+Additionally, the authors would like to thank Beth Brunk from \gls{MTD} and Pete Varney from \gls{UIUC} Facilities and Services for their contributions to the development of this document.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{ans}
+\bibliography{bibliography}
+\end{document}
+
+% \begin{table}[]
+% 	\centering
+%     \caption{\gls{GGE}, \gls{DGE}, and CO$_2$ produced.}
+%     \label{tab:meth}
+% 	\begin{tabular}{l|lll}
+% 	\hline
+% 	                 & Hydrogen & Gasoline    & Diesel      \\ \hline
+% 	GGE              & 1 kg     & 1 gallon    & 0.88 gallon \\
+% 	DGE              & 1.13 kg  & 1.13 gallon & 1 gallon    \\
+%     CO$_2$ produced  & -        & 19.64 lbs   & 22.38 lbs   \\ \hline
+% 	\end{tabular}
+% \end{table}
+
+% \begin{figure}[H]
+% 	\centering
+% 	\includegraphics[width=0.95\linewidth]{figures/uiuc-unleaded.png}
+% 	\hfill
+% 	\caption{Gasoline gallons consumed each day by the \gls{UIUC} fleet from January 1, 2019 to December 31, 2019 \cite{uiuc_personnal_communication}.}
+% 	\label{fig:uiucfuel}
+% \end{figure}
