@@ -65,7 +65,7 @@ The objective of this work is to conduct the Exercise 1 of Phase I of the benchm
 \section{Benchmark definition}
 
 The MHTGR-350 is a General Atomics design developed in the 1980s.
-This reactor is the base of the reference design.
+This reactor forms the base of the reference design.
 The benchmark specifies the fuel at the \gls{EOEC} core state because it leads to the highest decay heat load for the system and narrowest safety margins \cite{ortensi_prismatic_2011}.
 
 The core consists of an array of hexagonal fuel elements in a cylindrical arrangement \ref{fig:radial}.
@@ -147,13 +147,14 @@ Moltres is an open source simulation tool originally developed for simulating \g
 Moltres defines physics kernels and boundary conditions that solve arbitrary-group neutron diffusion, temperature, and precursor governing equations on a single mesh from one to three dimensions.
 In \gls{MOOSE} jargon, kernels are C++ classes that contain methods for computing residual and Jacobian contributions corresponding to individual pieces of governing equations \cite{lindsay_introduction_2018}.
 
-In Moltres, the time-dependent multi-group diffusion equation, equation \ref{eq:diffusion}, describes the neutron fluxes.
+In Moltres, the time-dependent multi-group diffusion equation, equation \ref{eq:diffusion}, describes the group $g$ neutron flux.
 
 \begin{align}
-        \frac{1}{v_g}\frac{\partial \phi_g}{\partial t} &- \nabla \cdot D_g
-        \nabla \phi_g + \Sigma_g^r \phi_g = \sum_{g \ne g'}^G
-        \Sigma_{g'\rightarrow g}^s \phi_{g'} + \chi_g^p \sum_{g' = 1}^G (1 -
-        \beta) \nu \Sigma_{g'}^f \phi_{g'} + \chi_g^d \sum_i^I \lambda_i C_i
+        \frac{1}{v_g}\frac{\partial}{\partial t} \phi_g &= \nabla \cdot D_g
+        \nabla \phi_g - \Sigma_g^r \phi_g \sum_{g \ne g'}^G
+        \Sigma_{g'\rightarrow g}^s \phi_{g'} + \notag\\
+        &\phantom{{}=1}\chi_g^p \sum_{g' = 1}^G (1 - \beta) \nu \Sigma_{g'}^f \phi_{g'} + 
+        \chi_g^d \sum_i^I \lambda_i C_i
 \label{eq:diffusion}
         \intertext{where}
         v_g &= \mbox{group $g$ neutron speed} \\
@@ -161,7 +162,8 @@ In Moltres, the time-dependent multi-group diffusion equation, equation \ref{eq:
         t &= \mbox{time} \\
         D_g &= \mbox{group $g$ diffusion coefficient} \\
         \Sigma_g^r &= \mbox{group $g$ macroscopic removal cross-section} \\
-        \Sigma_{g'\rightarrow g}^s &= \mbox{group $g'$ to group $g$ macroscopic scattering cross-section} \\
+        \Sigma_{g'\rightarrow g}^s &= \mbox{group $g'$ to group $g$ macroscopic scattering} \notag \\
+		&\phantom{{}=1} \mbox{cross-section}\\
         \chi_g^p &= \mbox{group $g$ prompt fission spectrum} \\
         G &= \mbox{number of discrete energy groups} \\
         \nu &= \mbox{number of neutrons produced per fission} \\
@@ -169,10 +171,10 @@ In Moltres, the time-dependent multi-group diffusion equation, equation \ref{eq:
         \chi_g^d &= \mbox{group $g$ delayed fission spectrum} \\
         I &= \mbox{number of delayed neutron precursor groups} \\
         \beta &= \mbox{delayed neutron fraction}\\
-        \lambda_i &= \mbox{average decay constant of delayed neutron precursors
-        in precursor group $i$} \\
-        C_i &= \mbox{concentration of delayed neutron precursors in precursor
-        group $i$}.
+        \lambda_i &= \mbox{average decay constant of delayed neutron} \notag\\
+        &\phantom{{}=1} \mbox{precursors in precursor group $i$} \\
+        C_i &= \mbox{concentration of delayed neutron precursors} \notag \\
+        &\phantom{{}=1} \mbox{in precursor group $i$}.
 \end{align}
 
 Equation \ref{eq:precursors} describes the delayed neutron precursors.
@@ -189,7 +191,7 @@ This study does not use such capability as the Exercise 1 of Phase I of the benc
 \section{Conclusion}
 
 OECD/NEA defined a benchmark to compare methods and tools for studying \glspl{PMR}.
-The benchmark defines a reference design based on the MHTGR-350 design from general atomics.
+The benchmark defines a reference design based on the MHTGR-350 design from General Atomics.
 The benchmark comprises three phases and several exercises.
 This study intends to complete exercise 1 of Phase I using Moltres.
 Moltres original purpose was the analysis of \glspl{MSR}.
