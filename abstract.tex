@@ -76,7 +76,7 @@ The RPV encases all the elements.
 
 Figure \ref{fig:axial} shows an axial view of the reactor.
 The active core consists of hexagonal graphite fuel elements containing blind holes for fuel compacts and full-length channels for helium coolant flow.
-10 fuel elements stacked on top of each other compose the 66 fuel columns that compose the active core.
+10 fuel elements stacked on top of each other compose the 66 fuel columns that integrate the active core.
 
 Thirty reflector columns contain channels for control rods.
 Twelve columns in the core also contain channels for reserve shutdown borated graphite pellets.
@@ -111,7 +111,7 @@ The following is a list of the proposed exercises for the steady state calculati
 	\item Coupled neutronics-thermal fluids steady state solution.
 \end{enumerate}
 
-As mentioned earlier, the scope of this work is the exercise 1 of Phase I.
+As mentioned earlier, the scope of this work is exercise 1 of Phase I.
 Future studies will focus on the rest of the exercises of Phase I.
 
 The benchmark specifies the cross sections required to conduct the exercise.
@@ -143,7 +143,7 @@ We do not plan to conduct studies of such phase in the future.
 
 \section{Moltres}
 
-Moltres is an open source simulation tool originally developed for simulating \glspl{MSR} by implementing deterministic neutronics and thermal hydraulics in the context of the \gls{MOOSE} finite element modeling framework.
+Moltres is an open source simulation tool originally developed for simulating \glspl{MSR} in the context of the \gls{MOOSE} finite element modeling framework.
 Moltres defines physics kernels and boundary conditions that solve arbitrary-group neutron diffusion, temperature, and precursor governing equations on a single mesh from one to three dimensions.
 In \gls{MOOSE} jargon, kernels are C++ classes that contain methods for computing residual and Jacobian contributions corresponding to individual pieces of governing equations \cite{lindsay_introduction_2018}.
 
@@ -186,7 +186,7 @@ Equation \ref{eq:precursors} describes the delayed neutron precursors.
 \end{align}
 
 As mentioned earlier, Moltres is also capable of solving the temperature.
-This study does not use such capability as the Exercise 1 of Phase I of the benchmark uses fixed cross sections.
+This study does not use such capability as exercise 1 of Phase I of the benchmark uses fixed cross sections.
 
 \section{Conclusion}
 
@@ -194,7 +194,7 @@ OECD/NEA defined a benchmark to compare methods and tools for studying \glspl{PM
 The benchmark defines a reference design based on the MHTGR-350 design from General Atomics.
 The benchmark comprises three phases and several exercises.
 This study intends to complete exercise 1 of Phase I using Moltres.
-Moltres original purpose was the analysis of \glspl{MSR}.
+Moltres original purpose is the analysis of \glspl{MSR}.
 Through this exercise we will demonstrate Moltres capabilities of analyzing \glspl{PMR}.
 
 \section{Acknowledgements}
