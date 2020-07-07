@@ -67,15 +67,17 @@ This dataset can be subsequently input into the HEXPEDITE code to generate the d
 
 \cite{ortensi_deterministic_2010}
 
-1-3
-
-6-8
-
+HTGRs have a strong temperature feedback, causing increased coupling between neutronics, fluid dynamics, and heat conduction.
+Because of the large time-scale separation, multiphysics transient simulations coupled via the operator-splitting approach may introduce significant numerical errors \cite{ragusa_consistent_2009} \cite{park_tightly_2010} 
 
 \cite{park_tightly_2010}
 
-
 \cite{ragusa_consistent_2009}
+
+Pronghorn:
+Porous media models approximate a solid-fluid medium as a two-phase mixture of solid and fluid, where the porosity ε reflects the fraction of a representative volume that is fluid.
+
+https://inldigitallibrary.inl.gov/sites/sti/sti/Sort_4093.pdf
 
 2013 - INL
 
@@ -84,8 +86,31 @@ Pronghorn [9]
 
 \cite{strydom_inl_2013}
 
+CAPP  neutron diffusion code based on the finite element method
+
+HELIOS/CAPP for PBR
+
+\cite{lee_development_2010}
+
+HELIOS/CAPP for PMR
+
+\cite{lee_development_2011}
+
 \cite{lemaire_multi-physics_2017}
 
+The generation of cross sections for annular HTRs is an active area of research.
+Previous studies [2,6,7,8] have shown that the neutronic characteristics of these cores complicate this essential step in the calculation process.
+
+\cite{ortensi_deterministic_2010-1}
+
+To read:
+\cite{lee_status_2006}
+
+VSOP: neutron diffusion
+
+NESTLE? Development of Two-step Reactor Physics Analysis Procedure for Advanced High Temperature Reactors
+
+“OECD/NEA/NSC PBMR Coupled Neutronics/Thermal Hydraulics Transient Benchmark: the PBMR-400 Core Design,” Draft 07, June (2007).
 
 
 More:
