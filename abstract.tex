@@ -64,38 +64,38 @@ Later, the Fort St. Vrain Generating Station (1976) in the \gls{US} laid the fou
 Modern \gls{HTGR} designs still use variants of its fuel assembly block.
 
 The \gls{PMR} design concept has existed for some time.
-However, the deterministic neutronic thermal-fluids and transient analysis tools available for the analysis of \glspl{PMR} is still 
-
-have lagged behind
-
- the state of the art compared to other reactor technologies \cite{oecd_nea_benchmark_2017}.
-
-This has not only motivated the testing of existing methods for \glspl{HTGR} but also the development of more accurate and efficient tools for the design and safety evaluations of the \gls{PMR}.
+However, the deterministic neutronic thermal-fluids and transient analysis tools available for the analysis of \glspl{PMR} are still under development.
+Compared to the state of the art of other reactor technologies, they have lagged behind.
+This has not only motivated the testing of existing methods for \glspl{HTGR} but also the development of more accurate and efficient tools for the design and safety evaluations of the \gls{PMR} \cite{oecd_nea_benchmark_2017}.
 
 In addition to the development of new methods, it is essential to define appropriate benchmarks to compare the capabilities of various computer codes.
-The OECE \gls{NEA} defined such benchmark for the MHTGR-350 reactor \cite{oecd_nea_benchmark_2017}.
+The \gls{OECD} \gls{NEA} defined such benchmark for the \gls{MHTGR}-350 MW reactor \cite{oecd_nea_benchmark_2017}.
 The scope of the benchmark is twofold: 1) to establish a well-defined problem, based on a common given data set, to compare methods and tools in core simulation and thermal fluids analysis, 2) to test the depletion capabilities of various lattice physics codes available for \glspl{PMR}.
 
-The objective of this work is to conduct exercise 1 of Phase I of the benchmark with the \gls{MOOSE} \cite{gaston_physics-based_2015} based tool \textit{Moltres}\cite{lindsay_introduction_2018}.
+The objective of this work is to conduct exercise 1 of Phase I of the benchmark with the \gls{MOOSE} \cite{gaston_physics-based_2015} based tool \textit{Moltres} \cite{lindsay_introduction_2018}.
+Finally, we will compare the results to the already published results from the benchmark.
 
 \section{Benchmark definition}
 
-The MHTGR-350 is a General Atomics design developed in the 1980s.
+The MHTGR-350 is a General Atomics design developed in the 1980s \cite{silady_licensing_1988}.
 This reactor forms the base of the reference design.
-The benchmark specifies the fuel at the \gls{EOEC} core state because it leads to the highest decay heat load for the system and narrowest safety margins \cite{ortensi_prismatic_2011}.
+The benchmark specifies the fuel at the \gls{EOEC} core state because it leads to the highest decay heat load for the system and narrowest safety margins \cite{oecd_nea_benchmark_2017}.
 
 The core consists of an array of hexagonal fuel elements in a cylindrical arrangement \ref{fig:radial}.
 A ring of identically sized solid graphite replaceable reflector elements surrounds the fuel elements.
 Then, a region of permanent reflector elements follows the replaceable reflectors.
-19 graphite replaceable reflector elements compose an inner reflector.
+Nineteen graphite replaceable reflector elements compose an inner reflector.
 The RPV encases all the elements.
 
 Figure \ref{fig:axial} shows an axial view of the reactor.
 The active core consists of hexagonal graphite fuel elements containing blind holes for fuel compacts and full-length channels for helium coolant flow.
-10 fuel elements stacked on top of each other compose the 66 fuel columns that integrate the active core.
+Ten fuel elements stacked on top of each other compose the 66 fuel columns that integrate the active core.
 
 Thirty reflector columns contain channels for control rods.
 Twelve columns in the core also contain channels for reserve shutdown borated graphite pellets.
+% Hoppers house the pellets above the core.
+% If the control rods become inoperable, the pellets drop into the channels.
+% \cite{oecd_nea_benchmark_2017}
 
 \begin{figure}[htbp!] %or H 
 	\centering
@@ -115,46 +115,36 @@ Twelve columns in the core also contain channels for reserve shutdown borated gr
 
 \subsection{Benchmark cases}
 
+Several Phases and Exercises compose the benchmark.
+
 \begin{itemize}
 	\item Phase I: Steady State
+        \begin{enumerate}
+            \item Neutronics solution with fixed cross sections. 
+            \item Thermal fluids solution with given heat sources.
+            \item Coupled neutronics-thermal fluids steady state solution.
+        \end{enumerate}
+
+        \item Phase II: Transient Cases
+        \begin{enumerate}
+            \item Depressurized Conduction Cooldown without reactor trip.
+            \item Pressurized Conduction Cooldown with reactor trip.
+            \item Water ingress with reactor trip.
+            \item Power 100-80-100 load follow.
+        \end{enumerate}
+
+        \item Phase III: Lattice Depletion Case
+
 \end{itemize}
-
-The following is a list of the proposed exercises for the steady state calculations:
-
-\begin{enumerate}
-	\item Neutronics solution with fixed cross sections. 
-	\item Thermal fluids solution with given heat sources.
-	\item Coupled neutronics-thermal fluids steady state solution.
-\end{enumerate}
 
 As mentioned earlier, the scope of this work is exercise 1 of Phase I.
-Future studies will focus on the rest of the exercises of Phase I.
-
 The benchmark specifies the cross sections required to conduct the exercise.
-This ensures a common dataset among different benchmark participants.
-The weighted multi-group macroscopic cross sections were obtained using DRAGON-4 \cite{marleau_user_2016}from a full block configuration with a double heterogeneity treatment of the fuel \cite{ortensi_prismatic_2011}.
+This ensures a common dataset among various benchmark participants.
+The weighted multi-group macroscopic cross sections were obtained using DRAGON-4 \cite{marleau_user_2016} from a full block configuration with a double heterogeneity treatment of the fuel \cite{oecd_nea_benchmark_2017}.
 The dataset contains 26 energy groups.
 
-\begin{itemize}
-	\item Phase II: Transient Cases
-\end{itemize}
-
-The following is a list of the proposed exercises for the transient calculations:
-
-\begin{enumerate}
-	\item Depressurized Conduction Cooldown without reactor trip.
-	\item Pressurized Conduction Cooldown with reactor trip.
-	\item Water ingress with reactor trip.
-	\item Power 100-80-100 load follow.
-\end{enumerate}
-
-Future studies will focus on Phase II.
-
-\begin{itemize}
-	\item Phase III: Lattice Depletion Case
-\end{itemize}
-
-This phase intends to examine variations in lattice calculations.
+Future studies will focus on the rest of the exercises of Phase I and, also, Phase II.
+Phase III examines variations in lattice calculations.
 We do not plan to conduct studies of such phase in the future.
 
 \section{Moltres}
@@ -201,7 +191,7 @@ Equation \ref{eq:precursors} describes the delayed neutron precursors.
 \label{eq:precursors}
 \end{align}
 
-As mentioned earlier, Moltres is also capable of solving the temperature.
+As mentioned earlier, Moltres is also capable of solving for the temperature.
 This study does not use such capability as exercise 1 of Phase I of the benchmark uses fixed cross sections.
 
 \section{Conclusion}
@@ -210,13 +200,12 @@ OECD/NEA defined a benchmark to compare methods and tools for studying \glspl{PM
 The benchmark defines a reference design based on the MHTGR-350 design from General Atomics.
 The benchmark comprises three phases and several exercises.
 This study intends to complete exercise 1 of Phase I using Moltres.
-Moltres original purpose is the analysis of \glspl{MSR}.
-Through this exercise we will demonstrate Moltres capabilities of analyzing \glspl{PMR}.
+Although the original purpose of Moltres is the analysis of \glspl{MSR}, through this exercise we will demonstrate the analysis of \glspl{PMR} using Moltres.
 
 \section{Acknowledgements}
 
-Roberto E. Fairhurst Agosta and Prof. Huff are supported by the \gls{NRC} Faculty Development Program (award NRC-HQ-84-14-G-0054 Program B).
-Prof. Huff is also supported by the Blue Waters sustained-petascale computing project supported by the National Science Foundation (awards OCI-0725070 and ACI-1238993) and the state of Illinois, the DOE ARPA-E MEITNER Program (award DE-AR0000983), the DOE H2@Scale Program (award), and the International Institute for Carbon Neutral Energy Research (WPI-I2CNER), sponsored by the Japanese Ministry of Education, Culture, Sports, Science and Technology.
+Roberto E. Fairhurst Agosta and Prof. Huff are supported by the \gls{NRC} Faculty Development Program (award NRC-HQ-84-14-G-0054 Program B) and the Department of Nuclear, Plasma, and Radiological Engineering.
+Prof. Huff is also supported by the Nuclear Regulatory Commission Faculty Development Program (award NRC-HQ-84-14-G-0054 Program B), the Blue Waters sustained-petascale computing project supported by the National Science Foundation (awards OCI-0725070 and ACI-1238993) and the state of Illinois, the DOE ARPA-E MEITNER Program (award DE-AR0000983), and the DOE H2@Scale Program (Award Number: DE-EE0008832)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{ans}
