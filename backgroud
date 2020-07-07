@@ -1,6 +1,98 @@
 % backgroud
 
-HEXPEDITE 
+1957
 
+Finite-differences techniques in computer codes designed to solve the few-group neutron diffusion equations in more than one spatial dimension.
+Codes such as PDQ program developed at Bettis Atomic Power Laboratory employed very novel iterative acceleration techniques.
+Even with current computers, practical limitations on computer storage and execution time generally prohibit the explicit modeling of each fuel pin in a light water reactor.
+Instead, 'equivalent' few-group diffusion-theory parameters are determined for relatively large homogeneous regions.
+With these parameters in hand, global solutions are computed for this homogenized-assembly representation of the reactor.
+Solution of this problem using traditional finite-difference techniques requires a large number of mesh points.
+The computational expense associated with these calculations motivated the development of less rigorous, yet more computationally efficient techniques oriented towards the determination of the flux averaged over each homogeneous region or 'node'.
+This class of methods thus became known as nodal methods, and the FLARE model developed in 1964 is representative of the first generation of these schemes.
+
+this is applied to LWR
+
+\cite{lawrence_progress_1986}
+
+In the 1970's, coarse mesh nodal methods have become a prominent analytical tool.
+According to the nodal theory, the fine heterogeneous mesh of the reactor geometry is modeled by large homogenized regions called nodes.
+The flux distribution of the homogenized reactor is calculated via a nodal method.
+Nodal methods for Cartesian geometry are firmly established and are highly efficient and accurate.
+
+In 1981 the feasibility of nodal methods in hexagonal geometry was first demonstrated.
+These formulations were based on the nodal procedure called the nodal expansion method (NEM).
+The method applies the transverse integration procedure (TIP) to the neutron diffusion equation.
+
+The TIP integrates out two of the spatial variables so that the remaining equation is pseudo-one-dimensional.
+Coupling to the other directions is represented in the transverse leakage term.
+
+A more effective formulation called HEXNOD introduced in 1988.
+In contrast to the NEM, the resulting differential equation is solved analytically.
+This algorithm showed much improvement, which can be primarily attributed to the implementation of the analytical flux solution.
+
+The HEXPEDITE approach uses the TIP to derive a pseudo-one-dimensional diffusion equation.
+The effective source is approximated by a polynomial expansion and the resulting differential equation is solved analytically for the 1-D flux.
+
+\cite{fitzpatrick_developments_1995}
+
+2010 - INL
+
+Prismatic reactor deterministic analysis tools
+Benchmark exercise based on the modeling of the \gls{HTTR}
+
+Dragon 4 cross-section preparation
+HEXPEDITE whole-core neutron-diffusion solver
+
+The DRAGON code is used in this study because it offers significant ease and versatility in modeling prismatic designs.
+Despite some geometric limitations, the code performs quite well compared to other lattice physics codes.
+
+HEXPEDITE is the hexagonal-z full-core solver used in this study and is based on the Green's Function solution of the transverse-integrated equations.
+Nodal diffusion method.
+
+Previous work on the HEXPEDITE methodology [11,12,13] has tested the approach against other spatial discretizations for the neutron diffusion equation in hexagonal and triangular geometry, such as the nodal expansion method (NEM) and finite difference method (FDM).
+These studies have established HEXPEDITE’s superiority in terms of accuracy and runtime over NEM and FDM.
+
+% Deterministic transport code INSTANT
+To further verify the multiplication factor calculation in HEXPEDITE, a comparison to a reference solution from the INL’s
+INSTANT transport solver using the same cross-section set is conducted. The INSTANT calculations are
+performed with a P1 solution method to provide a more consistent comparison to the HEXPEDITE method.
+
+% Comparison against serpent
+A second verification approach with SERPENT is attempted.
+Strictly speaking, this is not a classic verification, since the HEXPEDITE code solves the diffusion equation, whereas SERPENT solves the linearized Boltzmann transport equation.
+Nevertheless, the comparison should show how well the diffusion theory based solution in HEXPEDITE approximates the transport theory solution.
+The great advantage of the SERPENT code is its capability to generate diffusion-theory parameters including diffusion coefficients and a full scattering matrix from a high-fidelity Monte Carlo calculation.
+This dataset can be subsequently input into the HEXPEDITE code to generate the diffusion solution for the comparison.
+
+\cite{ortensi_deterministic_2010}
+
+1-3
+
+6-8
+
+
+\cite{park_tightly_2010}
+
+
+\cite{ragusa_consistent_2009}
+
+2013 - INL
+
+Helios-2: Methods of characteristics (MOC) transport solver, and Collision probabilities (CP) solver
+Pronghorn [9]
+
+\cite{strydom_inl_2013}
 
 \cite{lemaire_multi-physics_2017}
+
+
+
+More:
+-----
+
+March 1983
+DIF3D nodal neutronics
+
+VSOP
+HELIOS
