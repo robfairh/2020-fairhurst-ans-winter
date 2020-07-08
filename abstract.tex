@@ -64,7 +64,33 @@ Later, the Fort St. Vrain Generating Station (1976) in the \gls{US} laid the fou
 Modern \gls{HTGR} designs still use variants of its fuel assembly block.
 
 The \gls{PMR} design concept has existed for some time.
-However, the deterministic neutronic thermal-fluids and transient analysis tools available for the analysis of \glspl{PMR} are still under development.
+However, the deterministic neutronic thermal-fluids and transient analysis tools available for the analysis of \glspl{PMR} are a technology under development.
+
+Nowadays there are several codes to solve \glspl{PMR}.
+They rely on different methods such as \gls{MC}, deterministic transport, and deterministic diffusion.
+We focus our interest in the last type.
+% Deterministic diffusion solvers have lower computational requirements than other methods reference ??
+
+The story of deterministic diffusion solvers begins in the late 1950s with finite differences techniques applied to \glspl{LWR}.
+The computational expense associated with these calculations motivated the development of less rigorous, yet more computationally efficient techniques.
+Such techniques calculated the flux averaged over homogeneous regions or 'nodes'.
+This class of methods thus became known as nodal methods \cite{lawrence_progress_1986}.
+Some modern codes still use this technique. PARCS \cite{downar_parcs_2004} is an example of those codes.
+In the 1970's, coarse mesh nodal methods became a prominent analytical tool.
+They proved to be a highly efficient and accurate technique in Cartesian geometries.
+
+In 1981, a formulation based on \gls{NEM} first demonstrated the feasibility of nodal methods in hexagonal geometry \cite{duracz_nodal_1981}.
+
+Also DIF3 \cite{lawrence_dif3d_1983}
+
+However, this method introduced non-physical singular terms that require the utilization of discontinuous polynomials.
+The \gls{NEM} method adapted for hexagonal geometry was not as accurate as similar nodal methods in rectangular geometry.
+This motivated the development of HEXNOD \cite{wagner_three-dimensional_1989} and HEXPEDITE \cite{fitzpatrick_developments_1995} more effective formulations introduced in the late 1980s and early 1990s.
+
+HEXPEDITE is a hexagonal-z full-core solver.
+Previous studies \cite{} have established HEXPEDITE's superiority in terms of accuracy and runtime over \gls{FDM} and \gls{NEM}.
+
+\cite{ortensi_deterministic_2010}
 
 
 
