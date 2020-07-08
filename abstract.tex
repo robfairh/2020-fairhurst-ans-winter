@@ -65,7 +65,10 @@ Modern \gls{HTGR} designs still use variants of its fuel assembly block.
 
 The \gls{PMR} design concept has existed for some time.
 However, the deterministic neutronic thermal-fluids and transient analysis tools available for the analysis of \glspl{PMR} are still under development.
-Compared to the state of the art of other reactor technologies, they have lagged behind.
+
+
+
+Compared to the state of the art of other reactor technologies, the tools available for \gls{PMR} have lagged behind.
 This has not only motivated the testing of existing methods for \glspl{HTGR} but also the development of more accurate and efficient tools for the design and safety evaluations of the \gls{PMR} \cite{oecd_nea_benchmark_2017}.
 
 In addition to the development of new methods, it is essential to define appropriate benchmarks to compare the capabilities of various computer codes.
@@ -91,10 +94,10 @@ Figure \ref{fig:axial} shows an axial view of the reactor.
 The active core consists of hexagonal graphite fuel elements containing blind holes for fuel compacts and full-length channels for helium coolant flow.
 Ten fuel elements stacked on top of each other compose the 66 fuel columns that integrate the active core.
 
-Thirty reflector columns contain channels for control rods.
+Thirty reflector columns contain channels for \glspl{CR}.
 Twelve columns in the core also contain channels for reserve shutdown borated graphite pellets.
 % Hoppers house the pellets above the core.
-% If the control rods become inoperable, the pellets drop into the channels.
+% If the \glspl{CR} become inoperable, the pellets drop into the channels.
 % \cite{oecd_nea_benchmark_2017}
 
 \begin{figure}[htbp!] %or H 
@@ -152,9 +155,79 @@ The weighted multi-group macroscopic cross sections were obtained using DRAGON-4
 The dataset contains 26 energy groups.
 
 % What should be reported \cite{oecd_nea_benchmark_2017}
-see \cite{oecd_nea_coupled_2019} and \cite{strydom_inl_2013}
 
-% What was reported by who \cite{oecd_nea_coupled_2019}
+The exercise requests the reporting of the global parameters: $K_{eff}$, \gls{CR} worth ($\Delta \rho_{CR}$), and axial offset ($AO$).
+Average core power density, neutron-flux map, and a average power density map should be reported as well \cite{oecd_nea_benchmark_2017}.
+
+Equations \ref{eq:controlrod} and \ref{eq:ao} define $\Delta \rho_{CR}$ and $AO$.
+\begin{align}
+    \Delta \rho_{CR} &= \frac{k_{out}-k_{in}}{k_{out}k_{in}}
+\label{eq:controlrod}       
+    \intertext{where}
+    k_{out} &= \mbox{eigenvalue with \gls{CR} at position 1184.8 cm} \\
+    k_{in} &= \mbox{eigenvalue with \gls{CR} at position 391.81 cm} \\
+
+    AO &= (TP_{top}-TP_{bottom})/(TP_{top}+TP_{bottom})
+\label{eq:ao}
+    \intertext{where}
+    TP_{top} &= \mbox{total power produced in the top half core} \\
+    TP_{bottom} &= \mbox{total power produced in the bottom half core} \\
+\end{align}
+
+Table \ref{tab:participants} displays the list of the participants of Phase I Exercise 1 of the benchmark.
+Table \ref{tab:results} shows the mean, the \gls{SD}, and the \gls{RSD}, equation \ref{eq:rsd}, of the reported global parameters.
+
+\begin{align}
+    RSD &= \frac{SD}{mean} 100
+\label{eq:rsd}       
+\end{align}
+
+    \begin{table}[htbp!]
+        \centering
+        \caption{List of participants and codes used \cite{oecd_nea_coupled_2019}.}
+        \label{tab:participants}
+        \begin{tabular}{llll}
+        \hline
+        Country     & Organization  & Codes       & Method                           \\ \hline
+        \multirow{ 3}{*}{\gls{US}}     & \multirow{ 2}{*}{\gls{INL}}      & INSTANT     & Hybrid \gls{FEM} P$_N$ transport \\
+                    &               & Rattlesnake & \gls{FEM} diffusion              \\
+                    & \gls{UMICH}   & PARCS       & \gls{NEM} diffusion              \\
+        Korea       & \gls{KAERI}   & CAPP        & \gls{FEM} diffusion              \\
+        Korea       & \gls{SNU}     & McCARD      & \gls{MC} transport               \\
+        Korea       & \gls{UNIST}   & MCS         & \gls{MC} transport               \\
+        \multirow{ 3}{*}{Germany}   & \gls{HZDR}    & DYN3D       & Nodal simplified P$_N$ transport \\
+                    & \multirow{ 2}{*}{\gls{GRS}}   & DIF3D       & Finite volume diffusion          \\
+                    &               & PARCS       & \gls{NEM} diffusion              \\ \hline
+        \end{tabular}
+    \end{table}
+
+    \begin{table}[htbp!]
+        \centering
+        \caption{Mean and SD for global parameters \cite{oecd_nea_coupled_2019}.}
+        \label{tab:results}
+        \begin{tabular}{llll}
+        \hline
+        Method & Parameter       & $k_{eff}$ & \gls{CR} Worth (pcm)  & Axial offset \\ \hline
+        \multirow{ 3}{*}{Diffusion} & Mean & 1.06691 & 822.1 & 0.168 \\
+               & SD              & $4.19 \times 10^{-4}$ & 2.05 & $3.66 \times 10^{-3}$ \\
+               & RSD             & $3.93 \times 10^{-2}$ & 0.25 & 2.18 \\
+
+        \multirow{ 3}{*}{Transport} & Mean & 1.06882 & 850.3 & 0.166 \\
+               & SD              & $6.43 \times 10^{-5}$ & 3.20 & $2.34 \times 10^{-3}$ \\
+               & RSD             & $6.02 \times 10^{-3}$ & 0.376 & 1.41 \\
+
+        \multirow{ 3}{*}{All} & Mean & 1.06743 & 829.8 & 0.167 \\
+               & SD              & $9.26 \times 10^{-4}$ & 12.8 & $3.49 \times 10^{-3}$ \\
+               & RSD             & $8.67 \times 10^{-2}$ & 1.54 & 2.08 \\ \hline
+
+        \end{tabular}
+    \end{table}
+
+Overall, the results among the participants show good agreement among the codes that use the same method.
+The results of the fundamental mode eigenvalue have a \gls{RSD} below 0.1\%.
+The calculations of the \gls{CR} worth shows good agreement as well and the \gls{RSD} is below 0.4\%.
+The variability in the axial offset calculation is higher, but still shows good agreement.
+For a more thorough discussion and the rest of the results of the exercise refer to \cite{oecd_nea_coupled_2019}.
 
 \section{Moltres}
 
