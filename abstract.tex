@@ -19,6 +19,7 @@ ref3@illinois.edu
 \usepackage{enumitem}
 \usepackage{placeins}
 \usepackage{amsmath}
+\usepackage{multirow}
 \usepackage[acronym,toc]{glossaries}
 \include{acros}
 \makeglossaries
@@ -54,17 +55,17 @@ ref3@illinois.edu
 Moltres is a multi-physics tool for modeling coupled physics in nuclear reactors.
 Its original purpose was the modeling of Molten Salt Reactors.
 This work studies Moltres capabilities to model High Temperature Gas-Cooled Reactors.
-In order to do it, we will conduct Phase I: Exercise 1 of the OECD/NEA MHTGR-350 Benchmark.
+With that purpose we will conduct Phase I: Exercise 1 of the OECD/NEA MHTGR-350 Benchmark.
 }
 
 \section{Introduction}
 
 The history of \glspl{PMR} begins in the 1960s with the deployment of the Dragon reactor (1965) in the \gls{UK} and Peach Bottom (1966) in the \gls{US}.
-Later, the Fort St. Vrain Generating Station (1976) in the \gls{US} laid the foundation for future prismatic \gls{HTGR} designs.
+Later, the Fort St. Vrain Generating Station (1976) in the \gls{US} laid the foundation for future prismatic \gls{HTGR} designs \cite{aris_iaea_general_2013}.
 Modern \gls{HTGR} designs still use variants of its fuel assembly block.
 
 The \gls{PMR} design concept has existed for some time.
-However, the computational tools available for the analysis of \glspl{PMR} have lagged behind, compared to the state of the art of other reactor technologies.
+However, the computational tools available for the analysis of \glspl{HTGR} have lagged behind, compared to the state of the art of other reactor technologies.
 % However, the computational tools available for the analysis of \glspl{PMR} are a technology still under development.
 % Compared to the state of the art of other reactor technologies, the tools available for \gls{PMR} have lagged behind.
 % Nowadays there are several codes to solve \glspl{PMR}.
@@ -74,14 +75,16 @@ However, the computational tools available for the analysis of \glspl{PMR} have 
 The history of deterministic diffusion solvers begins in the late 1950s with the \gls{FDM} applied to \glspl{LWR}.
 The computational expense associated with these calculations motivated the development of more computationally efficient techniques such as nodal methods \cite{lawrence_progress_1986}.
 Some modern codes still use this technique.
-DIF3 \cite{lawrence_dif3d_1983} and PARCS \cite{downar_parcs_2004} are examples of those codes.
-In the 1970's, nodal methods proved to be a highly efficient and accurate technique in Cartesian geometries.
+DIF3D \cite{lawrence_dif3d_1983} and PARCS \cite{downar_parcs_2004} are examples of those codes.
+In the 1970s, nodal methods proved to be a highly efficient and accurate technique in Cartesian geometries.
 In 1981, a formulation based on \gls{NEM} first demonstrated the feasibility of nodal methods in hexagonal geometries \cite{duracz_nodal_1981}.
-Nevertheless, this method introduced non-physical singular terms that require the utilization of discontinuous polynomials.
+Nevertheless, this method introduces non-physical singular terms that requires the utilization of discontinuous polynomials.
 This motivated the development of HEXNOD \cite{wagner_three-dimensional_1989} and HEXPEDITE \cite{fitzpatrick_hexpedite_1992}, more effective formulations introduced in the late 1980s and early 1990s.
 Previous studies \cite{fitzpatrick_hexpedite_1992} \cite{ougouag_inherently_1993} \cite{fitzpatrick_developments_1995} have established HEXPEDITE's superiority in terms of accuracy and runtime over \gls{FDM} and \gls{NEM} \cite{ortensi_deterministic_2010}.
+HEXPEDITE's use still prevails in the analysis of \glspl{HTGR} \cite{ortensi_deterministic_2010-1}.
 
-Historically, linking together a neutronics and a thermal-hydraulics solver allowed for the simulation of an entire reactor.
+Historically, linking a neutronics solver to a thermal-hydraulics solver allowed for the simulation of an entire reactor.
+For example, coupling PARCS, DIREKT, and THERMIX \cite{seker_analysis_2006} allowed for solving the \gls{PBMR} \gls{OECD}/\gls{NEA}/\gls{NSC} Benchmark \cite{reitsma_oecdneansc_2006}.
 Nonetheless, \glspl{HTGR} have a strong temperature feedback, causing increased coupling between the different physics phenomena.
 Because of the large time-scale separation, multiphysics transient simulations coupled via the operator-splitting approach may introduce significant numerical errors \cite{ragusa_consistent_2009} \cite{park_tightly_2010}.
 \gls{MOOSE} \cite{gaston_moose_2009} \cite{gaston_physics-based_2015} is a computational framework targeted at solving fully coupled systems and allows for great flexibility even with large variance in time scales.
@@ -97,7 +100,7 @@ It solves arbitrary-group neutron diffusion, precursor, and temperature governin
 In addition to the development of new methods, it is essential to define appropriate benchmarks to compare the capabilities of various computer codes.
 The \gls{OECD} \gls{NEA} defined such benchmark for the \gls{MHTGR}-350 MW reactor \cite{oecd_nea_benchmark_2017}.
 The scope of the benchmark is twofold: 1) to establish a well-defined problem, based on a common given data set, to compare methods and tools in core simulation and thermal fluids analysis, 2) to test the depletion capabilities of various lattice physics codes available for \glspl{PMR}.
-The objective of this work is to conduct exercise 1 of Phase I of the benchmark with Moltres.
+The objective of this work is to conduct Exercise 1 of Phase I of the benchmark with Moltres.
 Finally, we will compare the results to the already published results from the benchmark.
 
 \section{Benchmark definition}
@@ -109,7 +112,7 @@ The benchmark specifies the fuel at the \gls{EOEC} core state because it leads t
 The core consists of an array of hexagonal fuel elements in a cylindrical arrangement \ref{fig:radial}.
 A ring of identically sized solid graphite replaceable reflector elements surrounds the fuel elements.
 Then, a region of permanent reflector elements follows the replaceable reflectors.
-Nineteen graphite replaceable reflector elements compose an inner reflector.
+Nineteen graphite replaceable reflector elements compose the inner reflector region.
 The RPV encases all the elements.
 
 Figure \ref{fig:axial} shows an axial view of the reactor.
@@ -118,8 +121,8 @@ Ten fuel elements stacked on top of each other compose the 66 fuel columns that 
 
 Thirty reflector columns contain channels for \glspl{CR}.
 Twelve columns in the core also contain channels for reserve shutdown borated graphite pellets.
+If the \glspl{CR} become inoperable, the pellets drop into the channels.
 % Hoppers house the pellets above the core.
-% If the \glspl{CR} become inoperable, the pellets drop into the channels.
 % \cite{oecd_nea_benchmark_2017}
 
 \begin{figure}[htbp!] %or H 
@@ -145,7 +148,7 @@ Several Phases and Exercises compose the benchmark.
 \begin{itemize}
 	\item Phase I: Steady State
         \begin{enumerate}
-            \item Neutronics solution with fixed cross sections. 
+            \item Neutronics solution with fixed cross-sections. 
             \item Thermal fluids solution with given heat sources.
             \item Coupled neutronics-thermal fluids steady state solution.
         \end{enumerate}
@@ -162,22 +165,21 @@ Several Phases and Exercises compose the benchmark.
 
 \end{itemize}
 
-As mentioned earlier, the scope of this work is exercise 1 of Phase I.
+As mentioned earlier, the scope of this work is Exercise 1 of Phase I.
 Future studies will focus on the rest of the exercises of Phase I and, also, Phase II.
 Phase III examines variations in lattice calculations.
 We do not plan to conduct studies of such phase in the future.
 
 \subsection{Phase I Exercise 1} % results or expected results ??
 
-The benchmark specifies the cross sections required to conduct the exercise in a separate file \textit{OECD-MHTGR350_Simplified.xs}.
+The benchmark specifies the cross-sections required to conduct the exercise in a separate file \textit{OECD-MHTGR350\_Simplified.xs}.
 This ensures a common dataset among various benchmark participants.
 A separate file \textit{xsmap.pdf} specifies a detailed map of the cross-section numbering.
 
-The weighted multi-group macroscopic cross sections were obtained using DRAGON-4 \cite{marleau_user_2016} from a full block configuration with a double heterogeneity treatment of the fuel \cite{oecd_nea_benchmark_2017}.
+The weighted multi-group macroscopic cross-sections were obtained using DRAGON-4 \cite{marleau_user_2016} from a full block configuration with a double heterogeneity treatment of the fuel \cite{oecd_nea_benchmark_2017}.
 The dataset contains 26 energy groups.
 
 % What should be reported \cite{oecd_nea_benchmark_2017}
-
 The exercise requests the reporting of the global parameters: $K_{eff}$, \gls{CR} worth ($\Delta \rho_{CR}$), and axial offset ($AO$).
 Average core power density, neutron-flux map, and a average power density map should be reported as well \cite{oecd_nea_benchmark_2017}.
 
@@ -187,16 +189,16 @@ Equations \ref{eq:controlrod} and \ref{eq:ao} define $\Delta \rho_{CR}$ and $AO$
 \label{eq:controlrod}       
     \intertext{where}
     k_{out} &= \mbox{eigenvalue with \gls{CR} at position 1184.8 cm} \\
-    k_{in} &= \mbox{eigenvalue with \gls{CR} at position 391.81 cm} \\
-
+    k_{in} &= \mbox{eigenvalue with \gls{CR} at position 391.81 cm}
+\intertext{and}
     AO &= (TP_{top}-TP_{bottom})/(TP_{top}+TP_{bottom})
 \label{eq:ao}
     \intertext{where}
     TP_{top} &= \mbox{total power produced in the top half core} \\
-    TP_{bottom} &= \mbox{total power produced in the bottom half core} \\
+    TP_{bottom} &= \mbox{total power produced in the bottom half core}
 \end{align}
 
-Table \ref{tab:participants} displays the list of the participants of Phase I Exercise 1 of the benchmark.
+The participants of Phase I Exercise 1 of the benchmark were: \gls{INL}, \gls{UMICH}, \gls{KAERI}, \gls{SNU}, \gls{UNIST}, \gls{HZDR}, and \gls{GRS}, Table \ref{tab:participants}.
 Table \ref{tab:results} shows the mean, the \gls{SD}, and the \gls{RSD}, equation \ref{eq:rsd}, of the reported global parameters.
 
 \begin{align}
@@ -208,44 +210,47 @@ Table \ref{tab:results} shows the mean, the \gls{SD}, and the \gls{RSD}, equatio
         \centering
         \caption{List of participants and codes used \cite{oecd_nea_coupled_2019}.}
         \label{tab:participants}
-        \begin{tabular}{llll}
+        \begin{tabular}{lll}
         \hline
-        Country     & Organization  & Codes       & Method                           \\ \hline
-        \multirow{ 3}{*}{\gls{US}}     & \multirow{ 2}{*}{\gls{INL}}      & INSTANT     & Hybrid \gls{FEM} P$_N$ transport \\
-                    &               & Rattlesnake & \gls{FEM} diffusion              \\
-                    & \gls{UMICH}   & PARCS       & \gls{NEM} diffusion              \\
-        Korea       & \gls{KAERI}   & CAPP        & \gls{FEM} diffusion              \\
-        Korea       & \gls{SNU}     & McCARD      & \gls{MC} transport               \\
-        Korea       & \gls{UNIST}   & MCS         & \gls{MC} transport               \\
-        \multirow{ 3}{*}{Germany}   & \gls{HZDR}    & DYN3D       & Nodal simplified P$_N$ transport \\
-                    & \multirow{ 2}{*}{\gls{GRS}}   & DIF3D       & Finite volume diffusion          \\
-                    &               & PARCS       & \gls{NEM} diffusion              \\ \hline
+        Organization  & Code        & Method                           \\ \hline
+        \multirow{ 2}{*}{INL} & INSTANT & Hybrid \gls{FEM} P$_N$ transport \\
+                      & Rattlesnake & \gls{FEM} diffusion              \\
+        UMICH         & PARCS       & \gls{NEM} diffusion              \\
+        KAERI         & CAPP        & \gls{FEM} diffusion              \\
+        SNU           & McCARD      & \gls{MC} transport               \\
+        UNIST         & MCS         & \gls{MC} transport               \\
+        HZDR          & DYN3D       & Nodal simplified P$_N$ transport \\
+        \multirow{ 2}{*}{GRS} & DIF3D    & Finite volume diffusion     \\
+                      & PARCS       & \gls{NEM} diffusion              \\ \hline
         \end{tabular}
     \end{table}
 
     \begin{table}[htbp!]
         \centering
-        \caption{Mean and SD for global parameters \cite{oecd_nea_coupled_2019}.}
+        \caption{Mean, SD, and RSD for global parameters \cite{oecd_nea_coupled_2019}.}
         \label{tab:results}
-        \begin{tabular}{llll}
+        \begin{tabular}{lllll}
+        % \small
         \hline
-        Method & Parameter       & $k_{eff}$ & \gls{CR} Worth (pcm)  & Axial offset \\ \hline
-        \multirow{ 3}{*}{Diffusion} & Mean & 1.06691 & 822.1 & 0.168 \\
+        Method &        & $k_{eff}$ & $\Delta \rho_{CR}$ & $AO$ \\
+        % &	& 	& (pcm) &  \\
+        \hline
+        \multirow{ 3}{*}{Diffusion} & Mean & 1.06691 & 822.1 pcm & 0.168 \\
                & SD              & $4.19 \times 10^{-4}$ & 2.05 & $3.66 \times 10^{-3}$ \\
-               & RSD             & $3.93 \times 10^{-2}$ & 0.25 & 2.18 \\
+               & RSD             & $3.93 \times 10^{-2}$ & 0.25 & 2.18 \\ \hline
 
-        \multirow{ 3}{*}{Transport} & Mean & 1.06882 & 850.3 & 0.166 \\
+        \multirow{ 3}{*}{Transport} & Mean & 1.06882 & 850.3 pcm & 0.166 \\
                & SD              & $6.43 \times 10^{-5}$ & 3.20 & $2.34 \times 10^{-3}$ \\
-               & RSD             & $6.02 \times 10^{-3}$ & 0.376 & 1.41 \\
+               & RSD             & $6.02 \times 10^{-3}$ & 0.376 & 1.41 \\ \hline
 
-        \multirow{ 3}{*}{All} & Mean & 1.06743 & 829.8 & 0.167 \\
+        \multirow{ 3}{*}{All} & Mean & 1.06743 & 829.8 pcm & 0.167 \\
                & SD              & $9.26 \times 10^{-4}$ & 12.8 & $3.49 \times 10^{-3}$ \\
                & RSD             & $8.67 \times 10^{-2}$ & 1.54 & 2.08 \\ \hline
 
         \end{tabular}
     \end{table}
 
-Overall, the results among the participants show good agreement among the codes that use the same method.
+Overall, the results among the participants show good agreement among the codes based on the same method.
 The results of the fundamental mode eigenvalue have a \gls{RSD} below 0.1\%.
 The calculations of the \gls{CR} worth shows good agreement as well and the \gls{RSD} is below 0.4\%.
 The variability in the axial offset calculation is higher, but still shows good agreement.
@@ -296,14 +301,14 @@ Equation \ref{eq:precursors} describes the delayed neutron precursors.
 \end{align}
 
 As mentioned earlier, Moltres is also capable of solving for the temperature.
-This study does not use such capability as exercise 1 of Phase I of the benchmark uses fixed cross sections.
+This study does not use such capability as Exercise 1 of Phase I of the benchmark uses fixed cross-sections.
 
 \section{Conclusion}
 
 OECD/NEA defined a benchmark to compare methods and tools for studying \glspl{PMR}.
 The benchmark defines a reference design based on the MHTGR-350 design from General Atomics.
 The benchmark comprises three phases and several exercises.
-This study intends to complete exercise 1 of Phase I using Moltres.
+This study intends to complete Exercise 1 of Phase I using Moltres.
 Although the original purpose of Moltres is the analysis of \glspl{MSR}, through this exercise we will demonstrate the analysis of \glspl{PMR} using Moltres.
 
 \section{Acknowledgements}
